@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, ReactNode, useCallback } from "react";
 import type { Product } from "@/types/product";
 import { ICartItem } from "@/types/cart";
 
@@ -8,8 +8,6 @@ const getCartItemId = (product: Product, selectedSize: number | null): string =>
   const sizeKey = selectedSize !== null && selectedSize !== undefined ? selectedSize : 'NOSIZE';
   return `${product._id}-${sizeKey}`;
 };
-
-
 
 interface CartContextType {
   cartItems: ICartItem[];
@@ -24,7 +22,6 @@ interface CartContextType {
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
-
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
@@ -49,7 +46,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [cartItems, isLoaded]);
 
-  const addToCart = (product: Product, selectedSize: number | null) => {
+  const addToCart = useCallback((product: Product, selectedSize: number | null) => {
     const itemId = getCartItemId(product, selectedSize);
 
     setCartItems((prev) => {
@@ -67,25 +64,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     });
 
     setIsCartOpen(true);
-  };
+  }, []);
 
-  const removeFromCart = (itemId: string) => {
+  const removeFromCart = useCallback((itemId: string) => {
     setCartItems((prev) => prev.filter((item) => item.itemId !== itemId));
-  };
+  }, []);
 
-  const clearCart = () => setCartItems([]);
+const clearCart = useCallback(() => {
+  setCartItems([]);
+  localStorage.removeItem("cart"); 
+}, []);
 
-
-  const increaseQuantity = (itemId: string) => {
+  const increaseQuantity = useCallback((itemId: string) => {
     setCartItems((prev) =>
       prev.map((item) =>
         item.itemId === itemId ? { ...item, quantity: item.quantity + 1 } : item
       )
     );
-  };
+  }, []);
 
-
-  const decreaseQuantity = (itemId: string) => {
+  const decreaseQuantity = useCallback((itemId: string) => {
     setCartItems((prev) =>
       prev
         .map((item) =>
@@ -95,13 +93,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         )
         .filter((item) => item.quantity > 0)
     );
-  };
+  }, []);
 
-  const getTotalPrice = () =>
+  const getTotalPrice = useCallback(() =>
     cartItems.reduce((total, item) => {
       const price = item.sale || item.price;
       return total + price * item.quantity;
-    }, 0);
+    }, 0), [cartItems]);
 
   return (
     <CartContext.Provider

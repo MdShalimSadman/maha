@@ -28,7 +28,8 @@ export default function PaymentSuccessPage() {
 
 useEffect(() => {
   clearCart();
-}, []);
+}, [clearCart]);
+
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6">
