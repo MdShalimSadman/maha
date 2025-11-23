@@ -5,7 +5,7 @@ type OrderItem = {
   quantity: number;
 };
 
-type Order = {
+export type Order = {
   fullName: string;
   email?: string;
   phone: string;
@@ -18,7 +18,7 @@ type Order = {
   status: "pending" | "processing" | "shipped" | "delivered" | "cancelled";
   userId?: string | null;          
   createdAt: string;    
-  paymentStatus:string;            
+  payment_status:string;            
 }
 
 export interface OrderDetails {

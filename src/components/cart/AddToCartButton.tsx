@@ -1,20 +1,16 @@
-// components/cart/AddToCartButton.tsx
-
 "use client";
 
-import { useCart, CartItem } from "@/context/CartContext"; // Assuming CartItem is now exported
+import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import type { Product } from "@/types/product";
 import GradientButton from "../common/GradientButton";
 
-// Interface for the component props
 interface AddToCartButtonProps {
   product: Product;
-  selectedSize: number | null; // The size selected by the user on the product page
-  disabled?: boolean; // Passed from ProductInteraction to disable if no size is picked
+  selectedSize: number | null;
+  disabled?: boolean;
 }
 
-// Utility function to create the unique ID (must match the one in CartContext)
 const getCartItemId = (
   product: Product,
   selectedSize: number | null
@@ -63,7 +59,7 @@ export default function AddToCartButton({
         </div>
       )}
       <GradientButton
-      className="cursor-pointer"
+        className="cursor-pointer"
         onClick={() => addToCart(product, selectedSize)}
         disabled={disabled}
       >
