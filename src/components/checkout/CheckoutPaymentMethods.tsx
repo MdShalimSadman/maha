@@ -20,33 +20,16 @@ const CheckoutPaymentMethods: FC<ICheckoutPaymentMethodsProps> = ({ register }) 
         Payment Method
       </Label>
 
-      <RadioGroup defaultValue="cash_on_delivery">
+      <RadioGroup defaultValue="ssl_commerz">
         <div className="flex flex-col gap-3">
-
-          {/* bKash */}
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="bkash" id="bkash" disabled />
-            <Image src="/images/payment/bkash.png" width={20} height={20} alt="bkash" />
-            <Label htmlFor="bkash" className="text-gray-500">bKash</Label>
-          </div>
-
-          {/* Stripe */}
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="stripe" id="stripe" disabled />
-            <Image src="/images/payment/visa.png" width={20} height={20} alt="visa" />
-            <Image src="/images/payment/master-card.png" width={20} height={20} alt="master" />
-            <Label htmlFor="stripe" className="text-gray-500">Visa / Mastercard</Label>
-          </div>
-
-          {/* Cash on Delivery */}
           <div className="flex items-center gap-2">
             <RadioGroupItem
-              value="cash_on_delivery"
-              id="cash_on_delivery"
+              value="ssl_commerz"
+              id="ssl_commerz"
               {...register("paymentMethod")}
             />
-            <Image src="/images/payment/money.png" width={20} height={20} alt="cash" />
-            <Label htmlFor="cash_on_delivery">Cash on Delivery</Label>
+            <Image src="/images/payment/sslcommerz.png" width={50} height={50} alt="cash" />
+            <Label htmlFor="cash_on_delivery">Pay with SSL Commerz</Label>
           </div>
 
         </div>
