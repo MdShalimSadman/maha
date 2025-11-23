@@ -48,7 +48,11 @@ const OrdersTableRow = ({
           onClick={handleCopyId}
           title={copied ? "Copied!" : "Copy Order ID"}
         >
-          {copied ? <Check className="w-4 h-4 text-green-600" /> : <Copy className="w-4 h-4" />}
+          {copied ? (
+            <Check className="w-4 h-4 text-green-600" />
+          ) : (
+            <Copy className="w-4 h-4" />
+          )}
         </Button>
       </TableCell>
       <TableCell>
@@ -59,6 +63,21 @@ const OrdersTableRow = ({
       <TableCell className="text-right font-bold text-lg">
         BDT {order.totalPrice.toFixed(2)}
       </TableCell>
+
+      <TableCell className="text-center">
+        {order.payment_status && (
+          <div
+            className={`${
+              order.payment_status === "Payment Successful"
+                ? "bg-green-500"
+                : "bg-yellow-500"
+            } text-white p-1 rounded-full text-xs`}
+          >
+            {order.payment_status}
+          </div>
+        )}
+      </TableCell>
+
       <TableCell>
         <Select
           value={order.status}
@@ -78,6 +97,7 @@ const OrdersTableRow = ({
           </SelectContent>
         </Select>
       </TableCell>
+
       <TableCell className="text-center">
         <Button
           variant="ghost"

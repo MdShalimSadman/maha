@@ -22,6 +22,7 @@ const OrdersTable = ({ orders, onViewDetails, onDelete, onStatusChange }: Orders
           <TableHead>Customer</TableHead>
           <TableHead>Date</TableHead>
           <TableHead className="text-right">Total</TableHead>
+           <TableHead className="text-center">Payment Status</TableHead>
           <TableHead className="w-[200px]">Status</TableHead>
           <TableHead className="text-center">Actions</TableHead>
         </TableRow>

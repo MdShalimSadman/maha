@@ -41,6 +41,7 @@ export interface FirestoreOrder {
   status: "Pending" | "Processing" | "Shipped" | "Delivered" | "Cancelled";
   items: OrderItem[];
   orderDate: Timestamp;
+  payment_status: string;
 }
 
 export default function OrdersIndex() {
