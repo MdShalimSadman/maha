@@ -105,7 +105,6 @@ const CheckoutIndex = () => {
   const onSubmit = async (data: ICheckoutFormData) => {
     setIsSubmitting(true);
     const orderId = await saveOrderToFirestore(data);
-    const totalPrice = getTotalPrice();
 
     if (!orderId) {
       setIsSubmitting(false);

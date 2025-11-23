@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Copy, Check, Loader2 } from "lucide-react";
+import { Copy, Check } from "lucide-react";
 import { toast } from "sonner";
 import GradientButton from "@/components/common/GradientButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
