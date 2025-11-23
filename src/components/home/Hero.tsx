@@ -11,44 +11,44 @@ import {
 } from "@/components/ui/carousel";
 import GradientButton from "../common/GradientButton";
 import Link from "next/link";
+import Image from "next/image";
 
 const slides = [
   {
     image: "/images/hero/third-image.jpg",
     title: "Your First Step Towards Modesty",
     subtitle: "Discover the latest trends",
-    url:"/new-in"
+    url: "/new-in",
   },
   {
     image: "/images/hero/second-image.jpg",
     title: "Summer Sale",
     subtitle: "Up to 50% off selected items",
-    url:"/sale"
+    url: "/sale",
   },
   {
     image: "/images/hero/first-image.png",
     title: "Premium Quality",
     subtitle: "Crafted with excellence",
-    url:"/new-in"
+    url: "/new-in",
   },
 ];
 
 const Hero = () => {
-  const plugin = React.useRef( Autoplay({ delay: 4000, stopOnInteraction: true }) );
+  const plugin = React.useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
 
   return (
-    <Carousel
-      plugins={[plugin.current]}
-      className="w-full"
-    >
+    <Carousel plugins={[plugin.current]} className="w-full">
       <CarouselContent>
         {slides.map((slide, index) => (
           <CarouselItem key={index}>
             <div className="relative h-[97vh] md:h-[500px] lg:h-[600px] w-full">
-              <img
+              <Image
                 src={slide.image || "/placeholder.svg"}
                 alt={slide.title}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                priority
               />
               <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                 <div className="text-center text-white space-y-4 px-4">
@@ -59,8 +59,8 @@ const Hero = () => {
                     {slide.subtitle}
                   </p>
                   <Link href={slide.url}>
-                 <GradientButton className="cursor-pointer">Shop Now</GradientButton>
-                </Link>
+                    <GradientButton className="cursor-pointer">Shop Now</GradientButton>
+                  </Link>
                 </div>
               </div>
             </div>

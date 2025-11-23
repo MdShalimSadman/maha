@@ -1,6 +1,7 @@
 
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebaseClient";
+import { Order } from "@/types/order";
 
 export async function createOrder(order: Omit<Order, "createdAt">) {
   const ordersCol = collection(db, "orders");

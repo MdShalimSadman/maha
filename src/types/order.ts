@@ -5,7 +5,7 @@ type OrderItem = {
   quantity: number;
 };
 
-type Order = {
+export type Order = {
   fullName: string;
   email?: string;
   phone: string;
@@ -17,5 +17,15 @@ type Order = {
   total: number;
   status: "pending" | "processing" | "shipped" | "delivered" | "cancelled";
   userId?: string | null;          
-  createdAt: string;                
+  createdAt: string;    
+  payment_status:string;            
+}
+
+export interface OrderDetails {
+    email: string;
+    fullName: string;
+    totalPrice: number; // Assuming amount is a number
+    address: string;
+    phone: string;
+    paymentMethod: string;
 }

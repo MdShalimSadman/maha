@@ -1,6 +1,6 @@
 "use client";
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import OrdersTableRow from "./OrdersTableRow";
 import type { FirestoreOrder } from "./index";
 
@@ -22,6 +22,7 @@ const OrdersTable = ({ orders, onViewDetails, onDelete, onStatusChange }: Orders
           <TableHead>Customer</TableHead>
           <TableHead>Date</TableHead>
           <TableHead className="text-right">Total</TableHead>
+           <TableHead className="text-center">Payment Status</TableHead>
           <TableHead className="w-[200px]">Status</TableHead>
           <TableHead className="text-center">Actions</TableHead>
         </TableRow>
