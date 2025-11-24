@@ -70,9 +70,11 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const validationUrl = is_live
-      ? "https://securepay.sslcommerz.com/validator/api/validationserverAPI.php"
-      : "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
+    // const validationUrl = is_live
+    //   ? "https://securepay.sslcommerz.com/validator/api/validationserverAPI.php"
+    //   : "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
+
+    const validationUrl = "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
 
     const validationParams = new URLSearchParams({
       val_id,
