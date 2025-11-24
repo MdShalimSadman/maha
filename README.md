@@ -27,9 +27,7 @@ A full-stack, production-ready E-Commerce web application built with **Next.js**
 - Successful transactions automatically recorded in Firebase Firestore
 
 ### 📦 Order Management System (OMS)
-- Customers can:
-  - View their order history  
-  - Track order status live  
+- Customers can track order status live  
 - All data fetched directly from Firestore
 
 ### 🛡️ Admin Panel
@@ -43,6 +41,7 @@ A full-stack, production-ready E-Commerce web application built with **Next.js**
 ### ✉️ Automatic Email Notifications
 - Order confirmations sent using **Nodemailer**
 - Customers receive real-time purchase emails
+- Admin also receives email when a new order is received
 
 ---
 
@@ -63,7 +62,8 @@ A full-stack, production-ready E-Commerce web application built with **Next.js**
 ### Order Confirmation with Nodemailer  
 ![Order Confirmation with Nodemailer](public/images/screenshots/email.png)
 
-
+### Admin Notification with Nodemailer  
+![Admin Notification with Nodemailer](public/images/screenshots/admin-email.png)
 ---
 
 ## 🧑‍💻 Getting Started
