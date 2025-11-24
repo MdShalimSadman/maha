@@ -1,4 +1,4 @@
-# Maha E-Commerce 🛍️  
+# Maha E-Commerce and OMS 🛍️  
 A full-stack, production-ready E-Commerce web application built with **Next.js**, featuring a powerful admin dashboard, real-time product management, secure payments, and customer order tracking.
 
 ## 🚀 Tech Stack
@@ -59,6 +59,10 @@ A full-stack, production-ready E-Commerce web application built with **Next.js**
 
 ### SSLCommerz Payment  
 ![SSLCommerz Easy Checkout](public/images/screenshots/payment.png)
+
+### Order Confirmation with Nodemailer  
+![Order Confirmation with Nodemailer](public/images/screenshots/email.png)
+
 
 ---
 
