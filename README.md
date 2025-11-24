@@ -52,7 +52,7 @@ A full-stack, production-ready E-Commerce web application built with **Next.js**
 ![Admin Dashboard](screenshots/dashboard.png) -->
 
 ### Login Screen  
-![Login](images/screenshots/login.png)
+![Login](public/images/screenshots/login.png)
 
 <!-- ### SSLCommerz Payment  
 ![SSLCommerz Easy Checkout](screenshots/payment.png) -->
