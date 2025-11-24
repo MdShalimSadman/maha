@@ -1,8 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Maha E-Commerce and OMS 🛍️  
+A full-stack, production-ready E-Commerce web application built with **Next.js**, featuring a powerful admin dashboard, real-time product management, secure payments, and customer order tracking.
 
-## Getting Started
+## 🚀 Tech Stack
+- **Frontend:** Next.js (App Router), TypeScript, Tailwind CSS  
+- **Database & Admin CMS:** Sanity  
+- **Authentication:** Firebase Auth  
+- **Backend:** Next.js Server Routes  
+- **Payments:** SSLCommerz (Easy Checkout)  
+- **Orders Storage:** Firebase Firestore  
+- **Emails:** Nodemailer  
+- **Admin Dashboard:** Recharts + Custom UI  
+- **Session Handling:** Middleware + Cookies  
 
-First, run the development server:
+---
+
+## 🔥 Key Features
+
+### 🛒 Storefront
+- Fully functional e-commerce experience  
+- Dynamic product listing and product detail pages  
+- Products managed in **Sanity CMS**  
+- Real-time updates without needing code changes
+
+### 💳 Secure Online Payments
+- Integrated **SSLCommerz Easy Checkout**
+- Successful transactions automatically recorded in Firebase Firestore
+
+### 📦 Order Management System (OMS)
+- Customers can:
+  - View their order history  
+  - Track order status live  
+- All data fetched directly from Firestore
+
+### 🛡️ Admin Panel
+- Admin authentication with **Firebase Auth**
+- Protected routes using middleware + cookies  
+- Admin features include:
+  - Sales analytics dashboard (Recharts)
+  - Order management and tracking
+  - Connected to Sanity for product inventory and data
+
+### ✉️ Automatic Email Notifications
+- Order confirmations sent using **Nodemailer**
+- Customers receive real-time purchase emails
+
+---
+
+## 🖼️ Screenshots
+
+### Login Screen  
+![Login](public/images/screenshots/login.png)
+
+### Admin Dashboard  
+![Admin Dashboard](public/images/screenshots/dashboard.png)
+
+### Order Tracking 
+![Order Tracking](public/images/screenshots/track-order.png)
+
+### SSLCommerz Payment  
+![SSLCommerz Easy Checkout](public/images/screenshots/payment.png)
+
+### Order Confirmation with Nodemailer  
+![Order Confirmation with Nodemailer](public/images/screenshots/email.png)
+
+
+---
+
+## 🧑‍💻 Getting Started
+
+Install dependencies:
 
 ```bash
 npm run dev
@@ -13,25 +79,4 @@ pnpm dev
 # or
 bun dev
 ```
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# maha-ecommerce
