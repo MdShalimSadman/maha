@@ -45,9 +45,13 @@ export async function POST(request: NextRequest) {
   const host = request.headers.get("host") || "";
   const base_url = `${protocol}://${host}`;
 
-  const sslczUrl = is_live
-    ? "https://securepay.sslcommerz.com/gwprocess/v4/api.php"
-    : "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
+  // const sslczUrl = is_live
+  //   ? "https://securepay.sslcommerz.com/gwprocess/v4/api.php"
+  //   : "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
+
+
+      const sslczUrl = "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
+
 
   // All values must be string for URLSearchParams
   const paymentData: Record<string, string> = {
