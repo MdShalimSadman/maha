@@ -21,6 +21,7 @@ A full-stack, production-ready E-Commerce web application built with **Next.js**
 - Dynamic product listing and product detail pages  
 - Products managed in **Sanity CMS**  
 - Real-time updates without needing code changes
+- Cart operations handled with **Redux Toolkit (RTK)**
 
 ### 💳 Secure Online Payments
 - Integrated **SSLCommerz Easy Checkout**

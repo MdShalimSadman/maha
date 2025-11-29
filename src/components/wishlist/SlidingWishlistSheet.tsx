@@ -2,6 +2,7 @@
 
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -28,7 +29,10 @@ const SlidingWishlistSheet = () => {
         </div>
       </SheetTrigger>
 
-      <SheetContent side="right" className="w-[400px]">
+      <SheetContent 
+        side="right" 
+        className="w-full sm:max-w-[400px] p-2"
+      >
         <SheetHeader>
           <SheetTitle className="text-[#A6686A] text-lg">
             Your Wishlist
@@ -38,7 +42,7 @@ const SlidingWishlistSheet = () => {
         <div className="mt-4 space-y-4 overflow-y-auto max-h-[80vh]">
           {wishlist.length === 0 ? (
             <p className="text-center text-gray-500 mt-6">
-              Your wishlist is empty
+              Your wishlist is empty 
             </p>
           ) : (
             wishlist.map((product) => (
@@ -46,27 +50,32 @@ const SlidingWishlistSheet = () => {
                 key={product._id}
                 className="flex items-center justify-between gap-4 p-4 rounded-lg hover:bg-[#A6686A]/10 transition"
               >
-                <Link
-                  href={`/products/${product.slug.current}`}
-                  className="flex items-center gap-4 flex-1"
-                >
-                  <div className="relative w-16 h-16 rounded-md overflow-hidden">
-                    <Image
-                      src={product.imageUrl || "/images/categories/hijab"}
-                      alt={product.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-medium">{product.title}</h3>
-                    <p className="text-sm text-gray-500">BDT {product.price}</p>
-                  </div>
-                </Link>
+                <SheetClose asChild>
+                  <Link
+                    href={`/products/${product.slug.current}`}
+                    className="flex items-center gap-4 flex-1 min-w-0"
+                  >
+                    <div className="relative w-16 h-16 rounded-md flex-shrink-0 overflow-hidden">
+                      <Image
+                        src={product.imageUrl || "/images/categories/hijab"}
+                        alt={product.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 64px"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="truncate">
+                      <h3 className="font-medium truncate">{product.title}</h3> 
+                      <p className="text-sm text-gray-500">
+                        BDT {product.price}
+                      </p>
+                    </div>
+                  </Link>
+                </SheetClose>
 
                 <button
                   onClick={() => toggleWishlist(product)}
-                  className="p-2 rounded-full hover:bg-red-100 transition"
+                  className="p-2 rounded-full hover:bg-red-100 transition flex-shrink-0"
                   title="Remove from wishlist"
                 >
                   <Trash2 className="text-[#7C4A4A] w-4 h-4" />
