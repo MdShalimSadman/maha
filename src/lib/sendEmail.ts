@@ -1,4 +1,3 @@
-// lib/sendEmail.ts
 import { transporter } from './nodemailer';
 
 export const sendEmail = async (to: string, subject: string, html: string) => {

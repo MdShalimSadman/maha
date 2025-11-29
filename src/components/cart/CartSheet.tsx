@@ -119,7 +119,6 @@ export default function CartSheet() {
                           size="icon"
                           variant="outline"
                           className="rounded-full bg-[#A6686A] text-white hover:bg-[#7C4A4A] hover:text-white cursor-pointer"
-                          // 🎯 Call Redux handler
                           onClick={() => handleIncreaseQuantity(item.itemId)}
                         >
                           +

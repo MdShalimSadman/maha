@@ -33,7 +33,6 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    // 🎁 Equivalent to: addToCart
     addToCart: (state, action: PayloadAction<{ product: Product, selectedSize: number | null }>) => {
       const { product, selectedSize } = action.payload;
       const itemId = getCartItemId(product, selectedSize);

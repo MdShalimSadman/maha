@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { client } from "@/lib/sanity.client"; // Adjust path to your Sanity client
+import { client } from "@/lib/sanity.client";
 
 export async function GET(request: NextRequest) {
   try {
@@ -10,7 +10,6 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ products: [], categories: [] });
     }
 
-    // Search for products
     const productsQuery = `*[_type == "product" && (
       title match $searchQuery ||
       category->name match $searchQuery
@@ -25,7 +24,6 @@ export async function GET(request: NextRequest) {
       }
     }`;
 
-    // Search for categories
     const categoriesQuery = `*[_type == "category" && name match $searchQuery] | order(name asc) [0...5] {
       _id,
       name,
@@ -33,7 +31,6 @@ export async function GET(request: NextRequest) {
       "productCount": count(*[_type == "product" && references(^._id)])
     }`;
 
-    // Execute both queries in parallel
     const [products, categories] = await Promise.all([
       client.fetch(productsQuery, { searchQuery: `${query}*` }),
       client.fetch(categoriesQuery, { searchQuery: `${query}*` }),

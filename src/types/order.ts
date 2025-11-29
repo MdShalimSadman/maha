@@ -24,7 +24,7 @@ export type Order = {
 export interface OrderDetails {
     email: string;
     fullName: string;
-    totalPrice: number; // Assuming amount is a number
+    totalPrice: number;
     address: string;
     phone: string;
     paymentMethod: string;

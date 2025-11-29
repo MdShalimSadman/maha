@@ -25,7 +25,6 @@ export default async function CategoryPage({
   const { slug } = params;
   const products: Product[] = await client.fetch(query, { slug });
 
-  // Convert "modest-gown" -> "MODEST GOWN"
   const formattedSlug = slug.replace(/-/g, " ").toUpperCase();
 
   if (!products?.length) {

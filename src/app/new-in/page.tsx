@@ -4,7 +4,6 @@ import ProductCard from "@/components/product/ProductCard";
 import AnimatedHeading from "@/components/common/AnimatedHeading";
 
 async function getNewInProducts(): Promise<Product[]> {
-  // Fetch products created within the last 30 days, newest first
   const query = `
     *[_type == "product" && _createdAt > $thirtyDaysAgo]
     | order(_createdAt desc) {
@@ -17,7 +16,6 @@ async function getNewInProducts(): Promise<Product[]> {
     }
   `;
 
-  // Calculate the date 30 days ago
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 

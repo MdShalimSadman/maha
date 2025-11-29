@@ -2,18 +2,17 @@
 
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
-import { auth } from '@/lib/firebaseClient'; // Your client-side auth instance
+import { auth } from '@/lib/firebaseClient';
 
-// Define the shape of the context data
+
 interface AuthContextType {
   currentUser: User | null;
-  loading: boolean; // True while checking auth status
+  loading: boolean; 
   handleLogout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Custom hook for easy access
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -22,7 +21,6 @@ export const useAuth = () => {
   return context;
 };
 
-// Logout handler function (now inside the provider)
 const apiLogout = () => fetch('/api/logout', { method: 'POST' });
 
 interface AuthProviderProps {
@@ -43,7 +41,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   useEffect(() => {
-    // This listener is crucial for client-side state
     const unsubscribe = onAuthStateChanged(auth, user => {
       setCurrentUser(user);
       setLoading(false); 
@@ -58,7 +55,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     handleLogout,
   };
 
-  // Only render children when we know the auth status
   return (
     <AuthContext.Provider value={value}>
       {!loading && children}

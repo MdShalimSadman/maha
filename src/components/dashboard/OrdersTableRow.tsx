@@ -33,7 +33,7 @@ const OrdersTableRow = ({
     navigator.clipboard.writeText(order.id).then(() => {
       setCopied(true);
       toast.success("Copied!");
-      setTimeout(() => setCopied(false), 1500); // show check for 1.5 seconds
+      setTimeout(() => setCopied(false), 1500); 
     });
   };
 

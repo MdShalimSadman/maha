@@ -32,7 +32,7 @@ const ProgressBar: FC<ProgressBarProps> = ({
     <Card className='mt-4 p-4 px-6'>
       <div className="flex w-full items-center justify-center rounded-2xl bg-white">
         <div className="relative w-[97%] mt-4">
-          {/* Progress bar with colored sections */}
+
           <div className="relative h-3 overflow-hidden rounded-full">
             {sections.map((s, i) => {
               const sectionWidth = 100 / total;
@@ -48,13 +48,12 @@ const ProgressBar: FC<ProgressBarProps> = ({
                     width: `${sectionWidth}%`
                   }}
                 >
-                  {/* Disabled section color (always there) */}
+
                   <div
                     className="h-full rounded-full"
                     style={{ backgroundColor: s.iconColor, opacity: 0.2 }}
                   />
 
-                  {/* Completed section - full color */}
                   {isCompleted && (
                     <motion.div
                       className="absolute left-0 top-0 h-full rounded-full"
@@ -65,7 +64,6 @@ const ProgressBar: FC<ProgressBarProps> = ({
                     />
                   )}
 
-                  {/* Current section - partial progress */}
                   {isCurrent && (
                     <motion.div
                       className="absolute left-0 top-0 h-full rounded-full"
@@ -82,7 +80,7 @@ const ProgressBar: FC<ProgressBarProps> = ({
             })}
           </div>
 
-          {/* Phase labels centered in their sections */}
+
           <div className="relative mt-6 flex">
             {sections.map((s, i) => {
               const sectionWidth = 100 / total;
@@ -96,17 +94,7 @@ const ProgressBar: FC<ProgressBarProps> = ({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {/* <motion.div
-                    className="mb-2 flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full text-xs md:text-sm font-bold text-white shadow-lg transition-all"
-                    style={{
-                      backgroundColor: s.iconColor,
-                      opacity: isActive ? 1 : 0.2
-                    }}
-                    animate={i === currentIndex ? { scale: [1, 1.15, 1] } : {}}
-                    transition={{ duration: 0.8, repeat: Number.POSITIVE_INFINITY }}
-                  >
-                    {i + 1}
-                  </motion.div> */}
+
                   <span
                     className="whitespace-nowrap text-[10px] md:text-xs font-semibold transition-all"
                     style={{ color: isActive ? s.iconColor : '#9CA3AF' }}

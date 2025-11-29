@@ -10,7 +10,7 @@ const GradientButton: FC<{
   hoverBgColorClass?: string;
   borderColorClass?: string;
   disabled?: boolean; 
-  type?: "button" | "submit" | "reset"; // ✅ added type prop
+  type?: "button" | "submit" | "reset"; 
 }> = ({
   children,
   onClick,
@@ -19,13 +19,13 @@ const GradientButton: FC<{
   hoverBgColorClass = 'bg-white',
   borderColorClass = 'border-[#7C4A4A]',
   disabled = false,
-  type = "button", // default
+  type = "button", 
 }) => {
   return (
     <Button
       onClick={onClick}
       disabled={disabled}
-      type={type} // ✅ set the button type
+      type={type} 
       className={cn(
         'group relative z-0 overflow-hidden rounded-full bg-gradient-to-r from-[#7C4A4A] to-[#A6686A] text-white transition-all duration-500',
         disabled

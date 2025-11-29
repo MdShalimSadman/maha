@@ -26,7 +26,6 @@ async function getProduct(slug: string): Promise<Product | null> {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  // Fetch product data on the server
   const product = await getProduct(params.slug);
 
   if (!product) return <p className="text-center mt-10">Product not found</p>;

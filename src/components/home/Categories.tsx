@@ -31,7 +31,7 @@ const Categories = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: i * 0.2 }} // stagger effect manually
+            transition={{ delay: i * 0.2 }} 
           >
             <Link
               href={`/category/${category.name.toLowerCase().replace(" ", "-")}`}

@@ -105,7 +105,6 @@ export default function CustomerFeedback() {
         </CarouselContent>
       </Carousel>
 
-      {/* Dots indicator */}
       <div className="flex justify-center mt-6 gap-2">
         {feedbacks.map((_, index) => (
           <button

@@ -24,7 +24,6 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const [wishlist, setWishlist] = useState<Product[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load from localStorage only once on mount
   useEffect(() => {
     const stored = localStorage.getItem("wishlist");
     if (stored) {
@@ -37,7 +36,6 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
     setIsLoaded(true);
   }, []);
 
-  // Save to localStorage whenever wishlist changes (but only after initial load)
   useEffect(() => {
     if (isLoaded) {
       localStorage.setItem("wishlist", JSON.stringify(wishlist));

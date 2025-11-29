@@ -25,7 +25,7 @@ export default function AnimatedHeading({
         visible: { transition: { staggerChildren: 0.3 } },
       }}
     >
-      {/* Slash animation — only if isSlash is true */}
+
       {isSlash && (
         <motion.span
           variants={{
@@ -49,7 +49,6 @@ export default function AnimatedHeading({
         </motion.span>
       )}
 
-      {/* Text animation */}
       <motion.span
         variants={{
           hidden: { x: -30, opacity: 0 },

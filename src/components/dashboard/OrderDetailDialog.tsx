@@ -62,7 +62,7 @@ const OrderDetailDialog = ({
     Cancelled: "#EF4444",
   };
 
-  const getStatusColor = (status: string) => statusColors[status] ?? "#9CA3AF"; // fallback gray
+  const getStatusColor = (status: string) => statusColors[status] ?? "#9CA3AF"; 
 
   const handleCopyOrderId = () => {
     navigator.clipboard.writeText(order.id);

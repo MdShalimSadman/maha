@@ -18,7 +18,6 @@ export async function POST(request: NextRequest) {
 
         const { tran_id, error } = data;
 
-        // Example: Verify the transaction with payment provider
         if (tran_id) {
             try {
                 const verifyResponse = await axios.post('https://api.paymentprovider.com/verify', {
@@ -39,7 +38,6 @@ export async function POST(request: NextRequest) {
             }
         }
 
-        // If verification fails or tran_id missing, redirect to failure
         const redirectUrl = `${baseUrl}/payment-failed?transactionId=${tran_id || 'unknown'}&error=${error || 'Payment failed'}`;
         return new Response(null, {
             status: 303,
@@ -61,7 +59,6 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const tran_id = searchParams.get('transactionId');
 
-    // Optionally, you could verify the transaction here with axios as well
     const redirectUrl = `${baseUrl}/payment-failed?transactionId=${tran_id || 'unknown'}`;
     return new Response(null, {
         status: 303,

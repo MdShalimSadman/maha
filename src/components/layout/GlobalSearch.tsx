@@ -5,8 +5,7 @@ import { Search, X, Package, Tag } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
-import { Product } from "@/types/product"; // Adjust path as needed
-
+import { Product } from "@/types/product";
 interface SearchResults {
   products: Product[];
   categories: Array<{
@@ -27,7 +26,6 @@ const GlobalSearch = () => {
   const [isLoading, setIsLoading] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
@@ -39,7 +37,6 @@ const GlobalSearch = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Debounced search
   useEffect(() => {
     const delaySearch = setTimeout(() => {
       if (query.trim().length > 0) {

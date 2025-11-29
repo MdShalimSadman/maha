@@ -40,8 +40,7 @@ export async function POST(request: NextRequest) {
 
   const tran_id = `TRN_${Date.now()}`;
 
-  const protocol =
-    request.headers.get("x-forwarded-proto") || "https";
+  const protocol = request.headers.get("x-forwarded-proto") || "https";
   const host = request.headers.get("host") || "";
   const base_url = `${protocol}://${host}`;
 
@@ -49,11 +48,8 @@ export async function POST(request: NextRequest) {
   //   ? "https://securepay.sslcommerz.com/gwprocess/v4/api.php"
   //   : "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
 
+  const sslczUrl = "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
 
-      const sslczUrl = "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
-
-
-  // All values must be string for URLSearchParams
   const paymentData: Record<string, string> = {
     store_id,
     store_passwd,
@@ -111,8 +107,7 @@ export async function POST(request: NextRequest) {
       { status: 400 }
     );
   } catch (err) {
-    const errorMessage =
-      err instanceof Error ? err.message : "Unknown error";
+    const errorMessage = err instanceof Error ? err.message : "Unknown error";
 
     return NextResponse.json(
       {
