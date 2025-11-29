@@ -31,8 +31,6 @@ export async function POST(request: Request) {
       data[key] = value.toString();
     });
 
-    console.log('IPN Received:', data);
-
     const { val_id, tran_id } = data;
 
     if (!val_id || !tran_id) {
@@ -54,7 +52,6 @@ export async function POST(request: Request) {
     const validationData: SSLCommerzValidationResponse = await validationResponse.json();
 
     if (validationData.status === 'VALID' || validationData.status === 'VALIDATED') {
-      console.log('IPN Validated Successfully:', tran_id);
       return NextResponse.json(
         { message: 'IPN processed successfully' },
         { status: 200 }

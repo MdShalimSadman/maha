@@ -32,7 +32,6 @@ const sendEmail = async (to: string, subject: string, html: string) => {
       subject,
       html,
     });
-    console.log("Email sent:", info.messageId);
     return info;
   } catch (error) {
     console.error("Email sending failed:", error);
@@ -74,7 +73,8 @@ export async function POST(request: NextRequest) {
     //   ? "https://securepay.sslcommerz.com/validator/api/validationserverAPI.php"
     //   : "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
 
-    const validationUrl = "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
+    const validationUrl =
+      "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
 
     const validationParams = new URLSearchParams({
       val_id,
@@ -123,7 +123,6 @@ export async function POST(request: NextRequest) {
               totalPrice: formattedTotalPrice,
             })
           );
-          console.log("Customer email sent successfully.");
 
           // Admin Email
           await sendEmail(
@@ -139,8 +138,6 @@ export async function POST(request: NextRequest) {
               paymentMethod: paymentMethod.replace(/_/g, " "),
             })
           );
-
-          console.log("Admin email sent successfully.");
         } catch (emailError) {
           console.error("Email sending failed:", emailError);
         }

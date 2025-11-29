@@ -1,6 +1,5 @@
 "use client";
 
-import { useCart } from "@/context/CartContext";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { db } from "@/lib/firebaseClient";
@@ -13,9 +12,13 @@ import CheckoutPaymentMethods from "./CheckoutPaymentMethods";
 import CheckoutOrderSummary from "./CheckoutOrderSummary";
 import { ICheckoutFormData } from "@/types/checkout";
 import { toast } from "sonner";
+import { useAppSelector } from "@/redux/hooks";
+import { selectTotalPrice } from "@/redux/cart/cartSelectors";
 
 const CheckoutIndex = () => {
-  const { cartItems, getTotalPrice } = useCart();
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
+
+  const totalPrice = useAppSelector(selectTotalPrice);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -41,7 +44,7 @@ const CheckoutIndex = () => {
           selectedSize: item.selectedSize,
           quantity: item.quantity,
         })),
-        totalPrice: getTotalPrice(),
+        totalPrice: totalPrice,
         orderDate: serverTimestamp(),
         status: "Pending",
         payment_status: "Awaiting Payment",
@@ -60,7 +63,7 @@ const CheckoutIndex = () => {
     data: ICheckoutFormData
   ) => {
     const paymentDetails = {
-      amount: getTotalPrice(),
+      amount: totalPrice,
       customer_name: data.fullName,
       customer_email: data.email,
       order_id: orderId,
@@ -141,10 +144,7 @@ const CheckoutIndex = () => {
         </GradientButton>
       </form>
       <div className="flex-1 h-full rounded-lg">
-        <CheckoutOrderSummary
-          cartItems={cartItems}
-          getTotalPrice={getTotalPrice}
-        />
+        <CheckoutOrderSummary cartItems={cartItems} totalPrice={totalPrice} />
       </div>
     </div>
   );

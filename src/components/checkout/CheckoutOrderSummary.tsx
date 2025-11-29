@@ -6,12 +6,12 @@ import { ICartItem } from "@/types/cart";
 
 type CheckoutOrderSummaryProps = {
   cartItems: ICartItem[];
-  getTotalPrice: () => number;
+  totalPrice: number;
 };
 
 const CheckoutOrderSummary: FC<CheckoutOrderSummaryProps> = ({
   cartItems,
-  getTotalPrice,
+  totalPrice,
 }) => {
   return (
     <div className="flex-1 bg-[#EFD8D6]/60 rounded-lg p-6">
@@ -52,12 +52,12 @@ const CheckoutOrderSummary: FC<CheckoutOrderSummaryProps> = ({
 
       <div className="flex justify-between font-normal mt-9 text-base text-gray-900">
         <span>Sub Total:</span>
-        <span>BDT {getTotalPrice().toFixed(2)}</span>
+        <span>BDT {totalPrice.toFixed(2)}</span>
       </div>
 
       <div className="flex justify-between font-semibold mt-1 text-lg text-gray-900">
         <span>Total:</span>
-        <span>BDT {getTotalPrice().toFixed(2)}</span>
+        <span>BDT {totalPrice.toFixed(2)}</span>
       </div>
 
     </div>

@@ -20,7 +20,6 @@ if (!getApps().length) {
     initializeApp({
       credential: admin.credential.cert(serviceAccount),
     });
-    console.log("Firebase Admin SDK initialized successfully.");
   } catch (error) {
     console.error("Firebase Admin initialization FAILED:", error);
   }
@@ -43,8 +42,6 @@ const updatePaymentStatus = async (
       paymentDetails: validationData,
       updatedAt: FieldValue.serverTimestamp(),
     });
-
-    console.log(`Order ${orderId} status updated to SUCCESS.`);
   } catch (error) {
     console.error(`Failed to update order ${orderId} in Firestore:`, error);
     throw new Error('Database update failed');

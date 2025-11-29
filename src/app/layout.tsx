@@ -3,11 +3,13 @@ import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/layout/Navbar";
 import WhatsAppChat from "../components/layout/WhatsAppChat";
-import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import Footer from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/sonner";
+
+import { ReduxProvider } from "@/components/layout/ReduxProvider";
+
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -38,7 +40,7 @@ export default function RootLayout({
         className={`${playfair.variable} ${poppins.variable} ${poppins.className} antialiased`}
       >
         <AuthProvider>
-          <CartProvider>
+          <ReduxProvider>
             <WishlistProvider>
               <Toaster />
               <Navbar />
@@ -46,7 +48,7 @@ export default function RootLayout({
               {children}
               <Footer />
             </WishlistProvider>
-          </CartProvider>
+          </ReduxProvider>
         </AuthProvider>
       </body>
     </html>
