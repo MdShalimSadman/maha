@@ -1,4 +1,3 @@
-// lib/sendEmail.ts
 import { transporter } from './nodemailer';
 
 export const sendEmail = async (to: string, subject: string, html: string) => {
@@ -9,8 +8,6 @@ export const sendEmail = async (to: string, subject: string, html: string) => {
       subject,
       html,
     });
-
-    console.log('Email sent:', info.messageId);
     return info;
   } catch (error) {
     console.error('Email sending failed:', error);

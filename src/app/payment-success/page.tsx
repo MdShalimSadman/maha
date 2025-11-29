@@ -7,17 +7,18 @@ import { Copy, Check } from "lucide-react";
 import { toast } from "sonner";
 import GradientButton from "@/components/common/GradientButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCart } from "@/context/CartContext";
+import { useAppDispatch } from "@/redux/hooks";
+import { clearCart } from "@/redux/cart/cartSlice";
 
 export default function PaymentSuccessPage() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
   const transactionId = searchParams.get("transactionId");
   const amount = searchParams.get("amount");
-  const { clearCart } = useCart();
-  
-  const [copiedField, setCopiedField] = useState<string | null>(null);
 
+  const dispatch = useAppDispatch();
+
+  const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const handleCopy = async (value: string, field: string) => {
     await navigator.clipboard.writeText(value);
@@ -26,17 +27,16 @@ export default function PaymentSuccessPage() {
     setTimeout(() => setCopiedField(null), 2000);
   };
 
-useEffect(() => {
-  clearCart();
-}, [clearCart]);
-
+  useEffect(() => {
+    dispatch(clearCart());
+  }, [dispatch]);
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6">
       <Card className="shadow-lg">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#A6686A]">
-            Payment Successful! 
+            Payment Successful!
           </CardTitle>
         </CardHeader>
 
@@ -80,7 +80,9 @@ useEffect(() => {
                         {transactionId}
                       </p>
                       <button
-                        onClick={() => handleCopy(transactionId, "transactionId")}
+                        onClick={() =>
+                          handleCopy(transactionId, "transactionId")
+                        }
                         className="p-1 text-[#A6686A] hover:text-[#8a5557] transition cursor-pointer"
                         aria-label="Copy Transaction ID"
                       >

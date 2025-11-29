@@ -1,6 +1,4 @@
-// components/products/ProductInteraction.tsx
-
-'use client'; // 👈 Essential for client-side interactivity (useState, onClick)
+'use client'; 
 
 import { useState } from 'react';
 import { Product } from '@/types/product';
@@ -18,7 +16,6 @@ export default function ProductInteraction({ product }: ProductInteractionProps)
 
   return (
     <>
-      {/* Size Selection */}
       {product.sizes && product.sizes.length > 0 && (
         <div className="mb-6">
           <h3 className="text-lg font-medium mb-2 text-gray-700">Select Size</h3>
@@ -40,19 +37,17 @@ export default function ProductInteraction({ product }: ProductInteractionProps)
               </button>
             ))}
           </div>
-          {/* Optional: Display error if no size is selected, though we pre-select one */}
           {product.sizes.length > 0 && !selectedSize && (
             <p className="text-sm text-red-500 mt-2">Please select a size.</p>
           )}
         </div>
       )}
 
-      {/* Action Buttons */}
       <div className="flex gap-4 items-center">
         <AddToCartButton 
           product={product} 
-          selectedSize={selectedSize} // Assuming AddToCartButton can accept this prop
-          disabled={!selectedSize && product.sizes && product.sizes.length > 0} // Disable if size is required but not picked
+          selectedSize={selectedSize} 
+          disabled={!selectedSize && product.sizes && product.sizes.length > 0} 
         />
         <WishlistButton product={product} />
       </div>

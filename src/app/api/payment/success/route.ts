@@ -1,4 +1,3 @@
-// app/api/payment/callback/route.ts
 import { type NextRequest } from "next/server";
 import axios from "axios";
 import nodemailer from "nodemailer";
@@ -16,14 +15,14 @@ const is_live = process.env.NODE_ENV === "production";
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || "smtp.gmail.com",
   port: Number(process.env.SMTP_PORT) || 465,
-  secure: true, // true for 465, false for other ports
+  secure: true, 
   auth: {
-    user: process.env.EMAIL_USER, // your email
-    pass: process.env.EMAIL_PASS, // app password or SMTP password
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS, 
   },
 });
 
-// Email sender helper
+
 const sendEmail = async (to: string, subject: string, html: string) => {
   try {
     const info = await transporter.sendMail({
@@ -32,7 +31,6 @@ const sendEmail = async (to: string, subject: string, html: string) => {
       subject,
       html,
     });
-    console.log("Email sent:", info.messageId);
     return info;
   } catch (error) {
     console.error("Email sending failed:", error);
@@ -74,7 +72,8 @@ export async function POST(request: NextRequest) {
     //   ? "https://securepay.sslcommerz.com/validator/api/validationserverAPI.php"
     //   : "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
 
-    const validationUrl = "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
+    const validationUrl =
+      "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
 
     const validationParams = new URLSearchParams({
       val_id,
@@ -123,7 +122,6 @@ export async function POST(request: NextRequest) {
               totalPrice: formattedTotalPrice,
             })
           );
-          console.log("Customer email sent successfully.");
 
           // Admin Email
           await sendEmail(
@@ -139,8 +137,6 @@ export async function POST(request: NextRequest) {
               paymentMethod: paymentMethod.replace(/_/g, " "),
             })
           );
-
-          console.log("Admin email sent successfully.");
         } catch (emailError) {
           console.error("Email sending failed:", emailError);
         }
@@ -148,7 +144,6 @@ export async function POST(request: NextRequest) {
         console.warn("Emails skipped: order details missing.");
       }
 
-      // Redirect to success
       const successUrl = `${baseUrl}/payment-success?transactionId=${tran_id}&orderId=${firestoreOrderId}`;
       return new Response(null, {
         status: 303,
@@ -169,9 +164,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// ---------------------
-// GET handler (unchanged)
-// ---------------------
 export async function GET(request: NextRequest) {
   const tran_id =
     request.nextUrl.searchParams.get("tran_id") ||

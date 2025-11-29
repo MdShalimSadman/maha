@@ -40,12 +40,10 @@ export default function ForgotPasswordPage() {
 
       toast.success(message);
       setSuccessMessage(message);
-
-      // Disable button for 60 seconds
       setIsButtonDisabled(true);
       setTimeout(() => {
         setIsButtonDisabled(false);
-      }, 60000); // 60 seconds
+      }, 60000); 
 
       reset();
     } catch (err: unknown) {
@@ -123,7 +121,7 @@ export default function ForgotPasswordPage() {
               </div>
             )}
 
-            {/* Submit Button */}
+         
             <GradientButton
               type="submit"
               disabled={loading || isButtonDisabled}
@@ -133,7 +131,7 @@ export default function ForgotPasswordPage() {
             </GradientButton>
           </form>
 
-          {/* Back to Login */}
+   
           <div className="text-sm  mt-4">
             <Link
               href="/login"

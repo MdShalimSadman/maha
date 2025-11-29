@@ -203,7 +203,7 @@ export default function OrdersIndex() {
           <OrdersTable
             orders={filteredOrders}
             onViewDetails={handleViewDetails}
-            onDelete={handleDeleteClick} // Use the new handler
+            onDelete={handleDeleteClick} 
             onStatusChange={handleStatusChange}
           />
         </CardContent>

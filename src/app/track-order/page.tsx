@@ -127,7 +127,6 @@ export default function TrackOrderPage() {
     }
   };
 
-  // Scroll to order detail when loaded
   useEffect(() => {
     if (order && orderDetailRef.current) {
       orderDetailRef.current.scrollIntoView({ behavior: "smooth" });

@@ -1,12 +1,11 @@
-// lib/nodemailer.ts
 import nodemailer from 'nodemailer';
 
 export const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",      // or your SMTP host
+  host: "smtp.gmail.com",
   port: 465,                   // 465 for secure, 587 for insecure
   secure: true,                // true for 465, false for 587
   auth: {
-    user: process.env.EMAIL_USER,      // your email
-    pass: process.env.EMAIL_PASS,      // your app password
+    user: process.env.EMAIL_USER,    
+    pass: process.env.EMAIL_PASS,    
   },
 });

@@ -3,7 +3,6 @@
 import { FC, useEffect } from 'react';
 import { motion, useAnimation, Variants } from 'framer-motion';
 
-// --- Type Definitions ---
 interface Section {
   iconColor: string;
 }
@@ -12,11 +11,9 @@ interface TruckProgressProps {
   progressPercentage: number;
   currentIndex: number;
   sections: Section[];
-  // Added for animation synchronization with the ProgressBar component
   animationDuration?: number; 
 }
 
-// ⭐️ Wheel Animation Variants
 const wheelVariants: Variants = {
   stop: {
     rotate: 0,
@@ -35,7 +32,6 @@ const wheelVariants: Variants = {
   }
 };
 
-// ⭐️ Engine Idle Animation for truck body
 const engineIdleVariants: Variants = {
   idle: {
     y: [0, -0.5, 0, -0.3, 0],
@@ -55,12 +51,11 @@ const engineIdleVariants: Variants = {
   }
 };
 
-// --- TruckProgress Component ---
 const TruckProgress: FC<TruckProgressProps> = ({
   progressPercentage,
   currentIndex,
   sections,
-  animationDuration = 0.8, // Defaulting to 0.8s for safety
+  animationDuration = 0.8,
 }) => {
   const darkBrown = '#7C4A4A';
   const mediumBrown = '#996262';
@@ -71,22 +66,16 @@ const TruckProgress: FC<TruckProgressProps> = ({
 
   const wheelControls = useAnimation();
   const bodyControls = useAnimation();
-  // Removed the unused 'isMoving' state
 
-  // ⭐️ Effect to manage spinning based on truck movement
   useEffect(() => {
-    // Start spinning immediately when the percentage changes
     wheelControls.start('spin');
     bodyControls.start('moving');
 
-    // Refactored 'timer' to be 'const' (as it's not reassigned) and adjusted duration
     const timer: NodeJS.Timeout = setTimeout(() => {
       wheelControls.start('stop');
       bodyControls.start('idle');
-      // Adding a small buffer (100ms) after the truck's main movement transition finishes
     }, (animationDuration * 1000) + 100); 
 
-    // Cleanup function
     return () => {
       clearTimeout(timer);
     };
@@ -97,7 +86,6 @@ const TruckProgress: FC<TruckProgressProps> = ({
       className="absolute hidden md:block z-10"
       style={{ top: '-28px' }}
       animate={{ left: `calc(${progressPercentage}% - 40px)` }}
-      // Synchronized transition duration and ease
       transition={{ 
         duration: animationDuration, 
         ease: 'easeInOut' 
@@ -118,11 +106,10 @@ const TruckProgress: FC<TruckProgressProps> = ({
         </defs>
         <g id="_x30_6_Delivery_Truck">
           <g>
-            {/* --- Truck Body (Non-Spinning Parts) --- */}
+
             <g>
               <g>
                 <g>
-                  {/* Main Body Rectangles */}
                   <rect height="263.717" style={{ fill: mediumBrown }} width="344.974" x="3.013" y="81.832" />
                 </g>
                 <g>
@@ -131,7 +118,6 @@ const TruckProgress: FC<TruckProgressProps> = ({
                 <g>
                   <rect height="263.713" style={{ fill: darkBrown }} width="19.758" x="328.231" y="81.837" />
                 </g>
-                {/* Windshield and Cab details */}
                 <g>
                   <path
                     d="M500.391,243.859v101.69H347.979V139.114h47.668c7.629,0,14.941,3.004,20.317,8.38l76.009,76.048C497.347,228.918,500.391,236.23,500.391,243.859z"
@@ -178,7 +164,7 @@ const TruckProgress: FC<TruckProgressProps> = ({
                     />
                   </g>
                 </g>
-                {/* Underbody/Shadow */}
+
                 <g>
                   <path
                     d="M508.991,353.178v15.257c0,4.213-3.415,7.628-7.628,7.628H10.644c-4.213,0-7.629-3.416-7.629-7.629v-22.885h498.347C505.575,345.549,508.991,348.965,508.991,353.178z"
@@ -198,7 +184,6 @@ const TruckProgress: FC<TruckProgressProps> = ({
                   />
                 </g>
                 
-                {/* --- Rear Wheel Assembly (Spinning Group) --- */}
                 <motion.g
                   variants={wheelVariants}
                   animate={wheelControls}
@@ -211,7 +196,6 @@ const TruckProgress: FC<TruckProgressProps> = ({
                   />
                 </motion.g>
 
-                {/* --- Front Wheel Assembly (Spinning Group) --- */}
                 <motion.g
                   variants={wheelVariants}
                   animate={wheelControls}
@@ -230,7 +214,6 @@ const TruckProgress: FC<TruckProgressProps> = ({
                   />
                 </motion.g>
                 
-                {/* --- Wheel Covers (Non-Spinning, Black) --- */}
                 <g>
                   <g>
                     <path
@@ -246,7 +229,6 @@ const TruckProgress: FC<TruckProgressProps> = ({
                   </g>
                 </g>
 
-                {/* --- Body Outline and Details --- */}
                 <path
                   d="M503.402,342.743v-98.885c0-8.357-3.392-16.537-9.302-22.443l-76.008-76.051c-5.973-5.973-13.945-9.263-22.447-9.263h-44.643V81.834c0-1.663-1.349-3.012-3.012-3.012H3.013c-1.663,0-3.012,1.349-3.012,3.012v286.6c0,5.867,4.772,10.639,10.643,10.639h23.254c1.581,30.091,26.488,54.106,56.969,54.106c30.477,0,55.384-24.015,56.965-54.106h197.293c1.581,30.091,26.488,54.106,56.969,54.106c30.477,0,55.384-24.015,56.965-54.106h42.302c5.867,0,10.639-4.773,10.639-10.639v-15.255C512.002,348.011,508.294,343.698,503.402,342.743z M351.002,142.124h44.643c6.894,0,13.353,2.663,18.188,7.498l76.008,76.051c4.792,4.788,7.537,11.416,7.537,18.184v37.576h-25.082c-2.165,0-4.227,0.839-6.067,2.529c-3.965,4.012-6.761,6.808-11,11.008c-1.302,1.467-2.02,3.306-2.02,5.176v9.957c0,4.11,3.341,7.451,7.451,7.451h36.718v24.98H448.24c-10.395-14.269-27.181-23.596-46.145-23.596c-18.966,0-35.754,9.327-46.149,23.596h-4.944V142.124z M497.378,287.458v24.074h-36.718c-0.788,0-1.427-0.639-1.427-1.427v-9.957c0-0.392,0.18-0.82,0.365-1.035c4.122-4.075,6.933-6.886,10.808-10.812c0.42-0.384,1.09-0.843,1.89-0.843H497.378zM6.024,84.846h338.953v257.69H137.013c-10.395-14.269-27.181-23.596-46.145-23.596c-18.966,0-35.754,9.327-46.149,23.596H6.023L6.024,84.846L6.024,84.846z M10.645,373.05c-2.549,0-4.62-2.071-4.62-4.616V348.56H40.83c-4.046,7.332-6.468,15.653-6.932,24.49H10.645z M90.868,427.156c-28.177,0-51.098-22.922-51.098-51.094c0-28.176,22.922-51.098,51.098-51.098c28.172,0,51.094,22.922,51.094,51.098C141.963,404.234,119.04,427.156,90.868,427.156zM140.902,348.56h211.157c-4.046,7.332-6.468,15.653-6.932,24.49H147.834C147.37,364.213,144.948,355.892,140.902,348.56zM402.096,427.156c-28.177,0-51.098-22.922-51.098-51.094c0-28.176,22.922-51.098,51.098-51.098c28.173,0,51.094,22.922,51.094,51.098C453.19,404.234,430.268,427.156,402.096,427.156z M505.977,368.434c0,2.545-2.071,4.616-4.616,4.616H459.06c-0.464-8.837-2.886-17.158-6.932-24.49h49.233c2.545,0,4.616,2.071,4.616,4.62L505.977,368.434L505.977,368.434z"
                   style={{ fill: '#333333' }}

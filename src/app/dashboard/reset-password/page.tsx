@@ -197,7 +197,6 @@ export default function ResetPasswordPage() {
               )}
             </div>
 
-            {/* Submit Button */}
             <GradientButton
               type="submit"
               disabled={loading}

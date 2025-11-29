@@ -1,9 +1,14 @@
 "use client";
 
-import { useCart } from "@/context/CartContext";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Button } from "@/components/ui/button";
 import type { Product } from "@/types/product";
 import GradientButton from "../common/GradientButton";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "@/redux/cart/cartSlice";
 
 interface AddToCartButtonProps {
   product: Product;
@@ -27,8 +32,9 @@ export default function AddToCartButton({
   selectedSize,
   disabled = false,
 }: AddToCartButtonProps) {
-  const { addToCart, increaseQuantity, decreaseQuantity, cartItems } =
-    useCart();
+  const dispatch = useAppDispatch();
+
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
 
   const itemId = getCartItemId(product, selectedSize);
 
@@ -43,7 +49,7 @@ export default function AddToCartButton({
             size="icon"
             variant="outline"
             className="rounded-full bg-[#A6686A] text-white hover:bg-[#7C4A4A] hover:text-white cursor-pointer"
-            onClick={() => decreaseQuantity(itemId)}
+            onClick={() => dispatch(decreaseQuantity(itemId))}
           >
             -
           </Button>
@@ -52,7 +58,7 @@ export default function AddToCartButton({
             size="icon"
             variant="outline"
             className="rounded-full bg-[#A6686A] text-white hover:bg-[#7C4A4A] hover:text-white cursor-pointer"
-            onClick={() => increaseQuantity(itemId)}
+            onClick={() => dispatch(increaseQuantity(itemId))}
           >
             +
           </Button>
@@ -60,7 +66,7 @@ export default function AddToCartButton({
       )}
       <GradientButton
         className="cursor-pointer"
-        onClick={() => addToCart(product, selectedSize)}
+        onClick={() => dispatch(addToCart({ product, selectedSize }))}
         disabled={disabled}
       >
         Add to Cart

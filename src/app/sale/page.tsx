@@ -4,7 +4,6 @@ import ProductCard from "@/components/product/ProductCard";
 import type { Product } from "@/types/product";
 import AnimatedHeading from "@/components/common/AnimatedHeading";
 
-// Fetch only products that have a sale value
 const query = groq`
   *[_type == "product" && defined(sale) && sale > 0]{
     _id,

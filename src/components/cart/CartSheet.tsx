@@ -1,35 +1,57 @@
-// components/cart/CartSheet.tsx
-
 "use client";
 
 import {
   Sheet,
   SheetContent,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ShoppingCart, Trash2 } from "lucide-react";
-// 💡 We use the updated useCart where CartItem includes selectedSize and itemId
-import { useCart } from "@/context/CartContext";
+
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeFromCart,
+  setIsCartOpen,
+} from "@/redux/cart/cartSlice";
+import { selectTotalPrice, selectIsCartOpen } from "@/redux/cart/cartSelectors";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import GradientButton from "../common/GradientButton";
 
 export default function CartSheet() {
-  const {
-    cartItems,
-    removeFromCart,
-    getTotalPrice,
-    increaseQuantity,
-    decreaseQuantity,
-    isCartOpen,
-    setIsCartOpen,
-  } = useCart();
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
+  const isCartOpen = useAppSelector(selectIsCartOpen);
+  const totalPrice = useAppSelector(selectTotalPrice);
+
+  const handleRemoveFromCart = (itemId: string) => {
+    dispatch(removeFromCart(itemId));
+  };
+
+  const handleIncreaseQuantity = (itemId: string) => {
+    dispatch(increaseQuantity(itemId));
+  };
+
+  const handleDecreaseQuantity = (itemId: string) => {
+    dispatch(decreaseQuantity(itemId));
+  };
+
+  const handleSetIsCartOpen = (open: boolean) => {
+    dispatch(setIsCartOpen(open));
+  };
+
+  const handleCheckoutClick = () => {
+    handleSetIsCartOpen(false);
+  };
 
   return (
-    <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
+    <Sheet open={isCartOpen} onOpenChange={handleSetIsCartOpen}>
       <SheetTrigger asChild>
         <div className="relative cursor-pointer">
           <ShoppingCart className="text-[#7C4A4A] hover:text-[#A6686A]" />
@@ -41,38 +63,39 @@ export default function CartSheet() {
         </div>
       </SheetTrigger>
 
-      <SheetContent className="w-[400px]">
-        <SheetHeader>
+      <SheetContent className="w-full sm:w-[400px] h-full max-h-full !gap-0">
+        <SheetHeader className="mb-0">
           <SheetTitle className="text-[#A6686A] text-lg">Your Cart</SheetTitle>
         </SheetHeader>
 
         {cartItems.length === 0 ? (
           <p className="text-center text-gray-500 mt-6">Your cart is empty</p>
         ) : (
-          <div className="flex flex-col gap-4 p-4 h-full">
-            <div className="flex-1 h-full overflow-y-auto">
+          <div className="flex flex-col px-4 h-full max-h-[calc(100%-5svh)]">
+            <div className="flex-1 max-h-full overflow-y-auto pr-2">
               {cartItems.map((item) => (
                 <div
                   key={item.itemId}
                   className="flex justify-between border-b mb-2 pb-3"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-start gap-3 w-3/4">
                     {item.imageUrl && (
                       <Image
                         src={item.imageUrl}
                         alt={item.title}
                         width={60}
                         height={60}
-                        className="rounded-md"
+                        className="rounded-md flex-shrink-0"
                       />
                     )}
                     <div>
-                      <p className="font-medium text-sm">{item.title}</p>
+                      <p className="font-medium text-sm leading-tight">
+                        {item.title}
+                      </p>
 
-                      {/* 🟢 NEW: Display the Selected Size */}
                       {item.selectedSize !== null &&
                         item.selectedSize !== undefined && (
-                          <p className="text-gray-700 text-xs">
+                          <p className="text-gray-700 text-xs mt-1">
                             Size:{" "}
                             <span className="font-semibold">
                               {item.selectedSize}
@@ -80,63 +103,60 @@ export default function CartSheet() {
                           </p>
                         )}
 
-                      {/* Display Price (Use sale price if available, based on CartContext logic) */}
-                      <p className="text-gray-500 text-sm">
+                      <p className="text-gray-500 text-sm mt-1">
                         BDT {(item.sale || item.price).toFixed(2)}
                       </p>
 
-                      <div className="mt-1 flex items-center gap-2 rounded-full border border-[#A6686A]">
+                      <div className="mt-2 flex items-center gap-1 rounded-full border border-[#A6686A] max-w-fit">
                         <Button
                           size="icon"
                           variant="outline"
-                          // 💡 Use item.itemId for decreaseQuantity
-                          className="rounded-full bg-[#A6686A] text-white hover:bg-[#7C4A4A] hover:text-white cursor-pointer"
-                          onClick={() => decreaseQuantity(item.itemId)}
+                          className="rounded-full bg-[#A6686A] text-white hover:bg-[#7C4A4A] hover:text-white cursor-pointer h-6 w-6 text-sm"
+                          onClick={() => handleDecreaseQuantity(item.itemId)}
                         >
                           -
                         </Button>
-                        <span>{item.quantity}</span>
+                        <span className="text-sm px-1">{item.quantity}</span>
                         <Button
                           size="icon"
                           variant="outline"
-                          className="rounded-full bg-[#A6686A] text-white hover:bg-[#7C4A4A] hover:text-white cursor-pointer"
-                          onClick={() => increaseQuantity(item.itemId)}
+                          className="rounded-full bg-[#A6686A] text-white hover:bg-[#7C4A4A] hover:text-white cursor-pointer h-6 w-6 text-sm"
+                          onClick={() => handleIncreaseQuantity(item.itemId)}
                         >
                           +
                         </Button>
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end justify-between !h-full">
-                    {/* <div className="flex-1 !h-full">
-                      <p className="font-semibold text-sm">
-                        BDT{" "}
-                        {((item.sale || item.price) * item.quantity).toFixed(2)}
-                      </p>
-                    </div> */}
+                  <div className="flex flex-col items-end pt-1">
                     <button
-                      onClick={() => removeFromCart(item.itemId)}
-                      className="p-2 cursor-pointer rounded-full hover:bg-red-100 transition"
+                      onClick={() => handleRemoveFromCart(item.itemId)}
+                      className="p-1 cursor-pointer rounded-full hover:bg-red-100 transition"
                     >
                       <Trash2 className="text-[#7C4A4A] w-4 h-4" />
                     </button>
+                    <span className="text-xs text-gray-500 mt-auto">
+                      BDT{" "}
+                      {((item.sale || item.price) * item.quantity).toFixed(2)}
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="border-t pt-4">
-              <div className="flex justify-between font-semibold text-lg text-gray-700">
-                <span>Total:</span>
-                <span>BDT {getTotalPrice().toFixed(2)}</span>
+
+            <SheetFooter>
+              <div className="border-t py-4">
+                <div className="flex justify-between font-semibold text-lg text-gray-700">
+                  <span>Total:</span>
+                  <span>BDT {totalPrice.toFixed(2)}</span>
+                </div>
+                <Link href="/checkout" onClick={handleCheckoutClick}>
+                  <GradientButton className="w-full mt-4 cursor-pointer">
+                    Checkout
+                  </GradientButton>
+                </Link>
               </div>
-              <Link href="/checkout" onClick={() => setIsCartOpen(false)}>
-                {" "}
-                {/* Close cart on navigation */}
-                <GradientButton className="w-full mt-4 cursor-pointer">
-                  Checkout
-                </GradientButton>
-              </Link>
-            </div>
+            </SheetFooter>
           </div>
         )}
       </SheetContent>

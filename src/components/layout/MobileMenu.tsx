@@ -67,7 +67,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems }) => {
                             .toLowerCase()
                             .replace(" ", "-")}`}
                           className="py-1"
-                          onClick={() => setOpen(false)} // <-- close sheet on click
+                          onClick={() => setOpen(false)} 
                         >
                           {subItem}
                         </Link>
@@ -82,7 +82,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ navItems }) => {
                   key={item.label}
                   href={item.href || "/"}
                   className="py-2 font-medium"
-                  onClick={() => setOpen(false)} // <-- close sheet on click
+                  onClick={() => setOpen(false)} 
                 >
                   {item.label}
                 </Link>

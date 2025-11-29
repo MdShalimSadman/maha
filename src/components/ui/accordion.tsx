@@ -5,16 +5,10 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { ChevronDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// -------------------------
-// Accordion Root
-// -------------------------
 function Accordion(props: React.ComponentProps<typeof AccordionPrimitive.Root>) {
   return <AccordionPrimitive.Root data-slot="accordion" {...props} />;
 }
 
-// -------------------------
-// Accordion Item
-// -------------------------
 function AccordionItem({
   className,
   ...props
@@ -28,9 +22,6 @@ function AccordionItem({
   );
 }
 
-// -------------------------
-// Accordion Trigger with iconClassName support
-// -------------------------
 interface AccordionTriggerProps
   extends React.ComponentProps<typeof AccordionPrimitive.Trigger> {
   iconClassName?: string;
@@ -64,9 +55,6 @@ function AccordionTrigger({
   );
 }
 
-// -------------------------
-// Accordion Content
-// -------------------------
 function AccordionContent({
   className,
   children,
@@ -83,7 +71,4 @@ function AccordionContent({
   );
 }
 
-// -------------------------
-// Export
-// -------------------------
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };

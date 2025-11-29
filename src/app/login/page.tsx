@@ -144,14 +144,12 @@ export default function LoginPage() {
               )}
             </div>
 
-            {/* Error Message */}
             {error && (
               <div className="p-3 text-sm font-medium text-red-700 bg-red-100 rounded-lg">
                 {error}
               </div>
             )}
 
-            {/* Submit Button */}
             <GradientButton
               type="submit"
               disabled={loading}
